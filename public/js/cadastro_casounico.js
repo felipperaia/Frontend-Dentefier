@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   
     // --- NOVO: busca o usuário logado e exibe o username ---
-    fetch('/api/users/me', { credentials: 'include' })
+    fetch('https://backend-dentefier.onrender.com/api/users/me', { credentials: 'include' })
       .then(res => {
         if (!res.ok) throw new Error('Não foi possível obter usuário');
         return res.json();
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   
     if (!window.google?.maps) {
-      fetch('/api/config', { credentials: 'include' })
+      fetch('https://backend-dentefier.onrender.com/api/config', { credentials: 'include' })
         .then(res => res.json())
         .then(cfg => {
           if (!cfg.googleMapsApiKey) throw new Error('Chave do Maps não configurada');
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
         jsonData.dataAbertura = new Date(jsonData.dataAbertura).toISOString();
       }
       try {
-        const response = await fetch('/api/casos', {
+        const response = await fetch('https://backend-dentefier.onrender.com/api/casos', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

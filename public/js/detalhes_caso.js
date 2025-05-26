@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   show();
   try {
-    const ur = await fetch('/api/auth/me', { credentials:'include' });
+    const ur = await fetch('https://backend-dentefier.onrender.com/api/auth/me', { credentials:'include' });
     if (!ur.ok) throw 'Não autenticado';
     user = await ur.json();
 
-    const cr = await fetch(`/api/casos/${caseId}`, { credentials:'include' });
+    const cr = await fetch(`https://backend-dentefier.onrender.com/api/casos/${caseId}`, { credentials:'include' });
     if (!cr.ok) throw 'Caso não encontrado';
     const data = await cr.json();
     currentCase = data.caso;
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!confirm('Confirma exclusão desta evidência?')) return;
     show();
     try {
-      const res = await fetch(`/api/evidencias/${id}`, {
+      const res = await fetch(`https://backend-dentefier.onrender.com/api/evidencias/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       });
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if(path==='responsavel'){
           if(user.role!=='admin') return;
           // carregar select de usuários
-          fetch('/api/users',{credentials:'include'}).then(r=>r.json()).then(list=>{
+          fetch('https://backend-dentefier.onrender.com/api/users',{credentials:'include'}).then(r=>r.json()).then(list=>{
             el.innerHTML=`<select data-field="responsavel">${list.map(u=>`<option value="${u._id}"${u._id===currentCase.responsavel?' selected':''}>${u.username}</option>`).join('')}</select>`;
           });
         } else {
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           set(body, key, val);
         });
         try {
-          const res = await fetch(`/api/casos/${caseId}`, {
+          const res = await fetch(`https://backend-dentefier.onrender.com/api/casos/${caseId}`, {
             method: 'PUT',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },

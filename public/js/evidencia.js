@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 1) Autenticação e autorização
   let user;
   try {
-    const res = await fetch('/api/auth/me', { credentials: 'include' });
+    const res = await fetch('https://backend-dentefier.onrender.com/api/auth/me', { credentials: 'include' });
     if (!res.ok) throw new Error('Não autenticado');
     user = await res.json();
   } catch {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 4) Carregar casos dinamicamente
   try {
-    const casosRes = await fetch('/api/casos', { credentials: 'include' });
+    const casosRes = await fetch('https://backend-dentefier.onrender.com/api/casos', { credentials: 'include' });
     if (!casosRes.ok) throw new Error();
     const casos = await casosRes.json();
     const selectCaso = document.getElementById('caso-select');
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 5) Carregar responsáveis (admin e assistente)
   try {
-    const usersRes = await fetch('/api/users?limit=100', { credentials: 'include' });
+    const usersRes = await fetch('https://backend-dentefier.onrender.com/api/users?limit=100', { credentials: 'include' });
     if (!usersRes.ok) throw new Error();
     const { data } = await usersRes.json();
     const selectResp = document.getElementById('responsavel-select');
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const form = e.target;
     const fd = new FormData(form);
     try {
-      const resp = await fetch('/api/evidencias', {
+      const resp = await fetch('https://backend-dentefier.onrender.com/api/evidencias', {
         method: 'POST',
         credentials: 'include',
         body: fd

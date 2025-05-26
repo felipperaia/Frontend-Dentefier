@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     // 1) Autenticação e usuário
-    const ru = await fetch('/api/auth/me', { credentials: 'include' });
+    const ru = await fetch('https://backend-dentefier.onrender.com/api/auth/me', { credentials: 'include' });
     if (!ru.ok) throw new Error('Não autenticado');
     const user = await ru.json();
     document.getElementById('usuarioNome').textContent = user.username;
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // 3) Busca dados do caso + evidências
-    const res = await fetch(`/api/casos/${encodeURIComponent(casoId)}`, { credentials: 'include' });
+    const res = await fetch(`https://backend-dentefier.onrender.com/api/casos/${encodeURIComponent(casoId)}`, { credentials: 'include' });
     if (!res.ok) throw new Error('Falha ao carregar dados do caso');
     const { caso, evidencias } = await res.json();
 

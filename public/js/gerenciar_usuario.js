@@ -2,7 +2,7 @@
   // 1) Autenticação + role
   let user;
   try {
-    const r = await fetch('/api/auth/me', { credentials: 'include' });
+    const r = await fetch('https://backend-dentefier.onrender.com/api/auth/me', { credentials: 'include' });
     if (!r.ok) throw new Error();
     user = await r.json();
   } catch {
@@ -121,7 +121,7 @@
     document.getElementById('user-to-delete').textContent = name;
     document.getElementById('delete-modal').classList.add('open');
     window.confirmDelete = async () => {
-      const r = await fetch(`/api/users/${id}`, { method:'DELETE', credentials:'include' });
+      const r = await fetch(`https://backend-dentefier.onrender.com/api/users/${id}`, { method:'DELETE', credentials:'include' });
       if (r.ok) {
         renderUsers(); 
         closeDeleteModal();

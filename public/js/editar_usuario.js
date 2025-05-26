@@ -5,7 +5,7 @@
     if (!id) return alert('ID de usuário ausente.');
   
     // busca dados iniciais
-    const resUser = await fetch(`/api/users/${id}`, { credentials:'include' });
+    const resUser = await fetch(`https://backend-dentefier.onrender.com/api/users/${id}`, { credentials:'include' });
     if (!resUser.ok) return alert('Não foi possível obter dados do usuário.');
     const user = await resUser.json();
   
@@ -24,7 +24,7 @@
         phone: form.phone.value,
         department: form.department.value
       };
-      const res = await fetch(`/api/users/${id}`, {
+      const res = await fetch(`https://backend-dentefier.onrender.com/api/users/${id}`, {
         method: 'PUT',
         credentials: 'include',
         headers: {'Content-Type':'application/json'},

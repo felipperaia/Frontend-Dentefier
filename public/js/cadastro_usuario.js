@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Autenticação e verificação de permissão (apenas admin)
   let currentUser;
   try {
-    const authRes = await fetch('/api/auth/me', { credentials: 'include' });
+    const authRes = await fetch('https://backend-dentefier.onrender.com/api/auth/me', { credentials: 'include' });
     if (!authRes.ok) throw new Error();
     currentUser = await authRes.json();
   } catch (err) {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     try {
-      const resp = await fetch('/api/users', {
+      const resp = await fetch('https://backend-dentefier.onrender.com/api/users', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const resp = await fetch('/api/auth/login', {
+      const resp = await fetch('https://backend-dentefier.onrender.com/api/auth/login', {
         method: 'POST',
         credentials: 'include',              // ← envia e recebe o cookie HttpOnly
         headers: { 'Content-Type': 'application/json' },

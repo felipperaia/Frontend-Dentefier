@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // autenticação
   let user;
   try {
-    const r = await fetch('/api/auth/me', { credentials:'include' });
+    const r = await fetch('https://backend-dentefier.onrender.com/api/auth/me', { credentials:'include' });
     if (!r.ok) throw new Error();
     user = await r.json();
     if (!['admin','assistente'].includes(user.role)) throw new Error();
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // carregar responsáveis
   try {
-    const ur = await fetch('/api/users?limit=100',{credentials:'include'});
+    const ur = await fetch('https://backend-dentefier.onrender.com/api/users?limit=100',{credentials:'include'});
     const { data } = await ur.json();
     document.getElementById('responsavel-select').innerHTML =
       '<option value="">Selecione...</option>' +
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // carregar evidência e caso
   let ev;
   try {
-    const er = await fetch(`/api/evidencias/${evidenciaId}`,{credentials:'include'});
+    const er = await fetch(`https://backend-dentefier.onrender.com/api/evidencias/${evidenciaId}`,{credentials:'include'});
     if (!er.ok) throw new Error();
     ev = await er.json();
 
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('evidence-creator').textContent =
       ev.registradoPor?.username || 'Não informado';
 
-    const cr = await fetch(`/api/casos/${ev.caso}`,{credentials:'include'});
+    const cr = await fetch(`https://backend-dentefier.onrender.com/api/casos/${ev.caso}`,{credentials:'include'});
     if (cr.ok) {
       const caso = (await cr.json()).caso;
       document.getElementById('caso-vinculado-info').textContent =
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // excluir
   document.querySelector('.delete-btn').addEventListener('click',async()=>{
     if(!confirm('Excluir evidência?')) return;
-    const dr=await fetch(`/api/evidencias/${evidenciaId}`,{method:'DELETE',credentials:'include'});
+    const dr=await fetch(`https://backend-dentefier.onrender.com/api/evidencias/${evidenciaId}`,{method:'DELETE',credentials:'include'});
     if(!dr.ok) { const err=await dr.json(); alert(err.message); }
     else window.location.href='/gerenciar_casos.html';
   });
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     fd.append('responsavelColeta',document.getElementById('responsavel-select').value);
     fd.append('dataColeta',document.getElementById('date-input').value);
     const f=document.getElementById('file-input').files[0]; if(f) fd.append('arquivo',f);
-    const ur=await fetch(`/api/evidencias/${evidenciaId}`,{method:'PUT',credentials:'include',body:fd});
+    const ur=await fetch(`https://backend-dentefier.onrender.com/api/evidencias/${evidenciaId}`,{method:'PUT',credentials:'include',body:fd});
     if(!ur.ok) { const err=await ur.json(); alert(err.message); }
     else window.location.href='/gerenciar_casos.html';
   });

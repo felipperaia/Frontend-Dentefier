@@ -4,7 +4,7 @@
     const id = params.get('id');
     if (!id) return alert('ID de usuário ausente.');
   
-    const res = await fetch(`/api/users/${id}`, { credentials:'include' });
+    const res = await fetch(`https://backend-dentefier.onrender.com/api/users/${id}`, { credentials:'include' });
     if (!res.ok) return alert('Usuário não encontrado.');
     const u = await res.json();
   

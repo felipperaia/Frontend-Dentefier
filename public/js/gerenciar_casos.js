@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Verifica autenticação e ajusta visibilidade
   let user;
   try {
-    const me = await fetch('/api/auth/me', { credentials: 'include' });
+    const me = await fetch('https://backend-dentefier.onrender.com/api/auth/me', { credentials: 'include' });
     if (!me.ok) throw new Error('Não autenticado');
     user = await me.json();
     document.querySelectorAll('.admin-only').forEach(el => {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 1) Carrega casos sem popular responsavel
   let allCases = [];
   try {
-    const rc = await fetch('/api/casos', { credentials: 'include' });
+    const rc = await fetch('https://backend-dentefier.onrender.com/api/casos', { credentials: 'include' });
     if (!rc.ok) throw new Error('Erro ao carregar casos');
     allCases = await rc.json();
   } catch (e) {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const uniqueIds = [...new Set(allCases.map(c => c.responsavel).filter(Boolean))];
   await Promise.all(uniqueIds.map(async id => {
     try {
-      const res = await fetch(`/api/users/${id}`, { credentials: 'include' });
+      const res = await fetch(`https://backend-dentefier.onrender.com/api/users/${id}`, { credentials: 'include' });
       if (res.ok) {
         const u = await res.json();
         userMap[id] = u.username;
