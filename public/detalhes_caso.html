@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DENTEFIER - Detalhes do Caso</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/detcaso.css">
+</head>
+<body>
+  <!-- Banner principal -->
+  <div class="top-banner">
+    <div class="banner-content">
+      <div class="logo-container">
+        <img src="images/logo_dentefier.png" alt="Logo DENTEFIER" class="main-logo">
+      </div>
+      <div class="banner-text">
+        <h1>DENTEFIER</h1>
+        <span class="origin-badge">Laudos e Perícias</span>
+        <p>Sistema de Gerenciamento de Casos Odontolegais</p>
+      </div>
+    </div>
+    <div class="accessibility-tools">
+      <button class="access-btn" id="btn-contrast"><img src="images/icon-contrast.png" alt="Contraste"></button>
+      <button class="access-btn" id="btn-font-increase"><img src="images/icon-font-increase.png" alt="Aumentar fonte"></button>
+      <button class="access-btn" id="btn-font-decrease"><img src="images/icon-font-decrease.png" alt="Diminuir fonte"></button>
+    </div>
+  </div>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="tela_inicio.html" class="active">HOME</a></li>
+        <li><a href="gerenciar_casos.html">GERENCIAR CASOS</a></li>
+        <li class="admin-only"><a href="gerenciar_usuario.html">USUÁRIOS</a></li>
+        <li><a href="logout.html">SAIR</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="loading-overlay"><div class="spinner"></div></div>
+  <!-- Banner e header mantidos iguais -->
+  <main class="container" id="detalhes-caso">
+    <div class="welcome-section">
+      <h2 id="case-title">Carregando caso...</h2>
+      <div class="date-info"><p>Data: <span id="current-date"></span></p></div>
+    </div>
+    <div class="report-actions">
+      <button class="btn-action" id="edit-case-btn">Editar Caso</button>
+      <button class="btn-action" id="save-case-btn" style="display:none;">Salvar Alterações</button>
+      <button class="btn-action" id="generate-report-btn">Gerar Relatório</button>
+    </div>
+
+    <!-- Seção 1: Dados do Caso -->
+    <section class="evidence-form-section">
+      <div class="form-header"><h3>1. Dados do Caso</h3></div>
+      <div class="form-grid">
+        <div class="form-column">
+          <div class="form-group"><label>Número do Caso:</label><p data-field="numeroCaso" class="report-data"></p></div>
+          <div class="form-group"><label>Data de Abertura:</label><p data-field="dataAbertura" class="report-data"></p></div>
+        </div>
+        <div class="form-column">
+          <div class="form-group"><label>Tipo de Caso:</label><p data-field="contexto.tipoCaso" class="report-data"></p></div>
+          <div class="form-group"><label>Status:</label><p><span data-field="status" class="status-badge"></span></p></div>
+        </div>
+        <!-- Adicione este trecho onde você exibe detalhes do caso -->
+        <div class="case-detail-row">
+          <span class="detail-label">Perito Responsável:</span>
+          <span class="detail-value" id="perito-responsavel"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção 2: Identificação -->
+    <section class="evidence-form-section">
+      <div class="form-header"><h3>2. Identificação do Examinado</h3></div>
+      <div class="form-grid">
+        <div class="form-column">
+          <div class="form-group"><label>Nome:</label><p data-field="dadosIndividuo.nome" class="report-data"></p></div>
+          <div class="form-group"><label>Idade:</label><p data-field="dadosIndividuo.idadeEstimado" class="report-data"></p></div>
+        </div>
+        <div class="form-column">
+          <div class="form-group"><label>Sexo:</label><p data-field="dadosIndividuo.sexo" class="report-data"></p></div>
+          <div class="form-group"><label>Etnia:</label><p data-field="dadosIndividuo.etnia" class="report-data"></p></div>
+        </div>
+      </div>
+    </section>
+
+<!-- Seção 3: Evidências -->
+<section class="evidence-form-section">
+  <div class="form-header">
+    <h3>3. Anexo de Evidências</h3>
+    <p>Total de evidências: <span id="total-evidencias">0</span></p>
+  </div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="select-all"></th>
+          <th>Tipo</th>
+          <th>Descrição</th>
+          <th>Data de Coleta</th>
+          <th>Responsável</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="evidencias-body"></tbody>
+    </table>
+  </div>
+</section>
+</main>
+
+  <script src="js/detalhes_caso.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<footer>
+  <div class="footer-content">
+    <div class="footer-logo">
+      <img src="images/logo_dentefier.png" alt="DENTEFIER">
+      <p>DENTEFIER &copy; 2025</p>
+    </div>
+    <div class="footer-origin">
+      <p>Sistema de Gerenciamento de Casos Odontolegais</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

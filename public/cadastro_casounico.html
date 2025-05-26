@@ -1,0 +1,200 @@
+<!-- public/cadastro_casounico.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DENTEFIER - Gerenciamento de Casos Odontolegais</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/casounico.css">
+</head>
+<body>
+  <div class="top-banner">
+    <div class="banner-content">
+      <div class="logo-container">
+        <img src="images/logo_dentefier.png" alt="Logo DENTEFIER" class="main-logo">
+      </div>
+      <div class="banner-text">
+        <h1>DENTEFIER</h1>
+        <span class="origin-badge">Laudos e Perícias</span>
+        <p>Sistema de Gerenciamento de Casos Odontolegais</p>
+      </div>
+    </div>
+    <div class="accessibility-tools">
+      <button class="access-btn" id="btn-contrast"><img src="images/icon-contrast.png" alt="Contraste"></button>
+      <button class="access-btn" id="btn-font-increase"><img src="images/icon-font-increase.png" alt="Aumentar fonte"></button>
+      <button class="access-btn" id="btn-font-decrease"><img src="images/icon-font-decrease.png" alt="Diminuir fonte"></button>
+    </div>
+  </div>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="tela_inicio.html" class="active">HOME</a></li>
+        <li><a href="gerenciar_casos.html">GERENCIAR CASOS</a></li>
+        <li class="admin-only"><a href="gerenciar_usuario.html">USUÁRIOS</a></li>
+        <li><a href="dashboard_busca.html">HISTÓRICO</a></li>
+        <li><a href="logout.html">SAIR</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="welcome-section">
+      <h2>Cadastro de Novo Caso</h2>
+      <p class="user-role">Função: <span id="usuario-papel">Administrador</span></p>
+      <div class="date-info">
+        <p>Data: <span id="current-date"></span></p>
+      </div>
+    </div>
+    
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="identificacao">1. Identificação</button>
+      <button class="tab-btn" data-tab="dados">2. Dados do Caso</button>
+      <button class="tab-btn" data-tab="localizacao">3. Localização</button>
+    </div>
+    
+    <form id="form-caso">
+      <!-- Tab 1: Identificação -->
+      <div class="tab-content active" id="identificacao">
+        <div class="form-group">
+          <input type="text" name="numeroCaso" placeholder="Número do Caso" required class="input-large">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" name="titulo" placeholder="Título do Caso" required class="input-large">
+          </div>
+          <div class="form-group">
+            <label for="dataAbertura">Data de Abertura:</label>
+            <input type="date" name="dataAbertura" required class="input-large">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="status">Status:</label>
+          <select name="status" required class="input-large">
+            <option value="">Selecione o Status</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Finalizado">Finalizado</option>
+            <option value="Arquivado">Arquivado</option>
+          </select>
+        </div>
+        
+        <!-- AGORA: campo só leitura com o username do perito logado -->
+        <div class="form-group">
+          <label for="peritoResponsavelDisplay">Perito Responsável:</label>
+          <input
+            type="text"
+            id="peritoResponsavelDisplay"
+            readonly
+            class="input-large"
+            placeholder="Carregando usuário..."
+          >
+        </div>
+        
+        <div class="section-title">
+          <h3>Dados do Indivíduo</h3>
+        </div>
+        <div class="form-group">
+          <input type="text" name="dadosIndividuo.nome" placeholder="Nome (se conhecido)" class="input-large">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dadosIndividuo.idadeEstimado">Idade:</label>
+            <input type="number" name="dadosIndividuo.idadeEstimado" placeholder="Idade estimada" min="0" max="120" class="input-large">
+          </div>
+          <div class="form-group">
+            <label for="dadosIndividuo.sexo">Sexo:</label>
+            <select name="dadosIndividuo.sexo" class="input-large">
+              <option value="">Selecione</option>
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="action-buttons">
+          <div></div>
+          <button type="button" class="btn-proxima" id="next-to-dados">Próximo <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+      
+      <!-- Tab 2: Dados do Caso -->
+      <div class="tab-content" id="dados">
+        <div class="section-title">
+          <h3>Contexto do Caso</h3>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <select name="contexto.tipoCaso" class="input-large">
+              <option value="">Tipo de Caso</option>
+              <option value="Odontologia Forense">Odontologia Forense</option>
+              <option value="Identificação Humana">Identificação Humana</option>
+              <option value="Exame Criminal">Exame Criminal</option>
+              <option value="Trauma">Trauma</option>
+              <option value="Estimativa de Idade">Estimativa de Idade</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" name="contexto.origemDemanda" placeholder="Origem da Demanda" required class="input-large">
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea name="contexto.descricao" placeholder="Descrição detalhada" required class="input-large"></textarea>
+        </div>
+        
+        <div class="action-buttons">
+          <button type="button" class="btn-secondary" id="back-to-identificacao"><i class="fas fa-arrow-left"></i> Anterior</button>
+          <button type="button" class="btn-proxima" id="next-to-localizacao">Próximo <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+      
+      <!-- Tab 3: Localização -->
+      <div class="tab-content" id="localizacao">
+        <div class="section-title">
+          <h3>Localização do Caso</h3>
+        </div>
+        <div class="form-group">
+          <input id="pac-input" type="text" placeholder="Buscar local" class="input-large">
+          <div id="map" style="height:400px; width:100%;"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="number" step="any" id="latitude" name="lat" placeholder="Latitude" required class="input-large">
+            </div>
+            <div class="form-group">
+              <input type="number" step="any" id="longitude" name="lng" placeholder="Longitude" required class="input-large">
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" id="enderecoCompleto" name="enderecoCompleto" placeholder="Endereço Completo" class="input-large">
+          </div>
+          <button type="button" id="btnLocalizacaoAtual" class="btn-secondary">
+            Usar Minha Localização Atual
+          </button>
+        </div>
+        
+        <div class="action-buttons">
+          <button type="button" class="btn-secondary" id="back-to-dados"><i class="fas fa-arrow-left"></i> Anterior</button>
+          <button type="submit" class="btn-proxima">Salvar Caso</button>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="images/logo_dentefier.png" alt="Logo DENTEFIER">
+        <span>DENTEFIER</span>
+      </div>
+      <div class="footer-origin">
+        <p>© 2025 DENTEFIER - Sistema de Gerenciamento de Casos Odontolegais</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/cadastro_casounico.js"></script>
+</body>
+</html>

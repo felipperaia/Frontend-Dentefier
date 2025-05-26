@@ -1,0 +1,448 @@
+.form-container {
+    background-color: var(--cor-secundaria);
+    padding: 2rem;
+    margin: 2rem auto;
+    border-radius: 8px;
+    max-width: 900px;
+    width: 95%;
+  }
+  
+  :root {
+    --cor-fundo: #222831;
+    --cor-secundaria: #393E46;
+    --cor-destaque: #FFD369;
+    --cor-texto: #EEEEEE;
+  }
+  
+  .form-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .form-section h3 {
+    color: var(--cor-destaque);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--cor-destaque);
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    margin-bottom: 15px;
+  }
+  
+  .form-col {
+    flex: 1;
+    padding: 0 10px;
+    min-width: 250px;
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--cor-texto);
+    font-size: 16px;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--cor-secundaria);
+    box-shadow: 0 0 0 2px rgba(255, 211, 105, 0.25);
+  }
+  
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;    
+    margin-top: 8px;
+  }
+  
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+  }
+  
+  .checkbox-item input[type="checkbox"] {
+    width: auto;
+    margin-right: 6px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .btn-cancel {
+    background-color: transparent;
+    border: 1px solid var(--cor-destaque);
+    color: var(--cor-destaque);
+  }
+  
+  .btn-submit {
+    background-color: var(--cor-destaque);
+    color: var(--cor-fundo);
+    font-weight: bold;
+    padding: 12px 30px;
+  }
+  
+  .required:after {
+    content: " *";
+    color: var(--cor-destaque);
+  }
+
+
+
+/* Reset básico e estilos gerais */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  font-size: 16px;
+}
+
+/* Container principal com largura máxima e centralização */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Banner principal responsivo */
+.top-banner {
+  background-color: var(--cor-secundaria);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo-container {
+  margin-right: 15px;
+}
+
+.main-logo {
+  max-width: 100px;
+  height: auto;
+}
+
+.banner-text {
+  flex: 1;
+}
+
+.accessibility-tools {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.access-btn {
+  background-color: var(--cor-destaque);
+  border: 1px solid var(--cor-texto);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.access-btn:hover {
+  background-color: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+}
+
+.access-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* Menu hamburguer para mobile */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 15px;
+}
+
+/* Grid responsivo para formulários */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Tabelas responsivas */
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Garante que a tabela não fique muito estreita */
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+/* Estilos para componentes */
+.evidence-form-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.form-header {
+  border-bottom: 1px solid var(--cor-destaque);
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+/* Galeria de imagens responsiva */
+.gallery-thumbnails {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.thumbnail {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 4px;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Footer responsivo */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Botões */
+.primary-btn, .secondary-btn, .view-btn, .table-btn {
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.primary-btn {
+  background-color: var(--cor-destaque);
+  color: white;
+  border: none;
+}
+
+.secondary-btn {
+  background-color: #f2f2f2;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+/* ===== MEDIA QUERIES ===== */
+
+/* Dispositivos grandes (desktops, 992px e acima) */
+@media (min-width: 992px) {
+  .top-banner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .accessibility-tools {
+    margin-top: 0;
+  }
+}
+
+/* Dispositivos médios (tablets, entre 768px e 991px) */
+@media (max-width: 991px) {
+  .banner-content {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .banner-text h1 {
+    margin-top: 10px;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dispositivos pequenos (celulares em paisagem, 576px e acima) */
+@media (max-width: 767px) {
+  nav ul {
+    flex-direction: column;
+    display: none;
+  }
+  
+  nav ul.show {
+    display: flex;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  
+  .signatures {
+    flex-direction: column;
+  }
+  
+  .signature-block {
+    margin-bottom: 15px;
+  }
+  
+  .report-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .report-actions button {
+    width: 100%;
+  }
+}
+
+/* Dispositivos muito pequenos (celulares em retrato) */
+@media (max-width: 575px) {
+  .main-logo {
+    max-width: 80px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  h3 {
+    font-size: 1.1rem;
+  }
+  
+  .gallery-thumbnails {
+    justify-content: center;
+  }
+  
+  .thumbnail img {
+    max-width: 100px;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-logo, .footer-origin {
+    margin-bottom: 15px;
+  }
+}
+
+/* Modo de Alto Contraste para acessibilidade */
+body.high-contrast {
+  background-color: #000;
+  color: #fff;
+}
+
+body.high-contrast .evidence-form-section,
+body.high-contrast .top-banner {
+  background-color: #222;
+  color: #fff;
+}
+
+body.high-contrast a {
+  color: #ffff00;
+}
+
+body.high-contrast .report-data,
+body.high-contrast .document-list,
+body.high-contrast .image-thumbnail,
+body.high-contrast .thumbnail {
+  background-color: #444;
+}
+
+body.high-contrast table th,
+body.high-contrast table td {
+  border-color: #666;
+}

@@ -1,0 +1,559 @@
+:root {
+    --cor-fundo: #222831;
+    --cor-secundaria: #393E46;
+    --cor-destaque: #FFD369;
+    --cor-texto: #EEEEEE;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+/* Responsividade para a tabela odontológica  ANALISAR DIREITINHOOO */
+@media (max-width: 768px) {
+    .arcade {
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 10px;
+    }
+    
+    .evidence-gallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .arcade {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
+    
+    .evidence-gallery {
+      grid-template-columns: 1fr;
+    }
+}
+
+.top-banner {
+    background-color: var(--cor-secundaria);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-container {
+    flex-shrink: 0;
+}
+
+.main-logo {
+    height: 80px;
+    width: auto;
+}
+
+.banner-text h1 {
+    color: var(--cor-destaque);
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.banner-text p {
+    margin-top: 5px;
+    font-size: 1.1rem;
+    color: var(--cor-texto);
+}
+
+.origin-badge {
+    display: inline-block;
+    background-color: var(--cor-destaque);
+    color: var(--cor-secundaria);
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.accessibility-tools {
+    display: flex;
+    gap: 10px;
+}
+
+.access-btn {
+    background: none;
+    border: 2px solid var(--cor-destaque);
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.access-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.access-btn:hover {
+    background-color: var(--cor-destaque);
+}
+
+
+/* Responsividade do menu  AQUI NÃO TEM FORM-ROW, SÓ FORM-GROUP */
+/* @media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        width: 95%;
+        margin: 5px 0;
+    }
+    
+    nav ul li a {
+        display: block;
+        text-align: center;
+    }
+} */
+
+/* Estilos do cabeçalho  IGUAL NAS OUTRAS PÁGINAS!*/
+header {
+    background-color: var(--cor-secundaria);
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    color: var(--cor-destaque);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0.5rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--cor-destaque);
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+nav ul li a.active {
+    background-color: var(--cor-destaque);
+    color: var(--cor-secundaria);
+}
+
+/* Estilos do conteúdo principal */
+main {
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  
+section {
+    margin: 20px 0;
+}
+  
+section h2 {
+    color: var(--cor-destaque);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--cor-destaque);
+}
+  
+.container {
+    background-color: var(--cor-secundaria);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para o formulário */
+.section-title {
+    margin: 25px 0 20px 0;
+    border-bottom: 2px solid var(--cor-destaque);
+    padding-bottom: 8px;
+}
+  
+.section-title h3 {
+    color: var(--cor-destaque);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+  
+.form-group {
+    margin-bottom: 15px;
+}
+
+.input-large {
+    font-size: 18px !important;
+    padding: 12px !important;
+}
+
+/* .form-row {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+} */
+
+input[type="text"],
+/* input[type="date"], */
+input[type="datetime-local"],
+/* input[type="number"], */
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #EEEEEE;
+  color: var(--cor-fundo);
+  font-size: 16px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+input[type="file"] {
+    padding: 5px 0;
+}
+
+.file-hint {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 5px;
+    margin-left: 12px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--cor-texto);
+}
+
+/* .labelOculto label{
+    display: none;
+} */
+
+/* Estilo para checkboxes e radio buttons  AQUI SÓ TEM CHECKBOX, SEM O GROUP */
+/* .checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+  
+.checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+} */
+  
+/* .radio-options {
+    margin-top: 5px;
+} */
+
+/* Estilo para a tabela odontológica */
+.odonto-grid {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.odonto-info {
+    margin-bottom: 15px;
+}
+
+.odonto-info p {
+    color: var(--cor-texto);
+    margin: 0;
+    font-weight: bold;
+}
+
+.arcade-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.arcade {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 5px;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 10px;
+    position: relative;
+}
+
+.arcade:before {
+    content: 'Arcada Superior';
+    position: absolute;
+    top: -25px;
+    left: 0;
+    color: var(--cor-destaque);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.arcade.inferior:before {
+    content: 'Arcada Inferior';
+}
+
+.dente-container {
+    text-align: center;
+    background-color: #555;
+    border-radius: 4px;
+    padding: 5px 2px;
+}
+
+.dente-container label {
+    display: block;
+    font-size: 12px;
+    color: var(--cor-texto);
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.dente-container input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.dente-container:hover {
+    background-color: #666;
+}
+
+.dente-container input[type="checkbox"]:checked + label {
+    color: var(--cor-destaque);
+    font-weight: bold;
+}
+
+/* Estilo para a galeria de evidências */
+.evidence-upload-container {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.upload-actions {
+    margin-top: 15px;
+}
+
+.btn-secondary {
+    background-color: #555;
+    color: var(--cor-texto);
+    border: 1px solid var(--cor-destaque);
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 16px;
+}
+  
+.btn-secondary:hover {
+    background-color: #666;
+    color: var(--cor-destaque);
+}
+
+.evidence-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+    min-height: 100px;
+}
+
+.no-evidence {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #888;
+    padding: 20px;
+}
+
+/* Estilo para o modal de imagem */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+  
+.close-modal:hover {
+    color: #bbb;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+/* Estilo específico para o botão de próxima etapa  USADO AQUI E EM PERITO MAS MUDEI BESTEIRA */
+.action-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 60px;
+    margin-top: 20px;
+}
+
+.btn-proxima {
+    background-color: var(--cor-destaque);
+    color: var(--cor-secundaria);
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    flex: 1;
+    text-align: center;
+    display: block;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-proxima:hover {
+    background-color: #e6c55a;
+}
+
+#modalCaption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+
+
+/*  PARA A PARTE DE JS!!!!  */
+/* .evidence-item {
+    position: relative;
+    height: 150px;
+    background-color: #444;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+  
+.evidence-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+  
+.evidence-delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 5;
+}
+  
+.evidence-delete:hover {
+    background-color: rgba(255,0,0,0.7);
+}
+  
+ */
+
+
+
+
+
+
+
+
+
+
+/* Estilo para destaque de campos obrigatórios */
+input:required, select:required, textarea:required {
+    border-left: 5px solid var(--cor-destaque);
+}
+
+/* Melhorias de usabilidade */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 2px rgba(255, 211, 105, 0.25);
+}

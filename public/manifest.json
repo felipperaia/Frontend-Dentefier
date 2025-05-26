@@ -1,0 +1,20 @@
+{
+  "name": "Plataforma Odonto-Legal",
+  "short_name": "OdontoLegal",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#222831",
+  "theme_color": "#FFD369",
+  "icons": [
+    {
+      "src": "images/icons/playstore.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icons/playstore.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

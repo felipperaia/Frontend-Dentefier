@@ -1,0 +1,268 @@
+:root {
+    --cor-fundo: #222831;
+    --cor-secundaria: #393E46;
+    --cor-destaque: #FFD369;
+    --cor-texto: #EEEEEE;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--cor-secundaria);
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  header h1 {
+    margin-bottom: 0.5rem;
+  }
+  
+  header button {
+    background-color: var(--cor-destaque);
+    color: var(--cor-fundo);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  header button:hover {
+    background-color: #e6c55a;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  nav ul li {
+    margin: 0.5rem;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: var(--cor-destaque);
+    font-weight: bold;
+  }
+  
+
+  
+  /* Responsividade da navbar */
+  @media (min-width: 768px) {
+    nav ul {
+      justify-content: space-around;
+    }
+  }
+  
+/* Responsividade do menu */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        width: 95%;
+        margin: 5px 0;
+    }
+
+    nav ul li a {
+        display: block;
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) {
+    nav ul {
+        justify-content: space-around;
+    }
+}
+
+/* Estilos do conteúdo principal */
+main {
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  
+section {
+    margin: 20px 0;
+}
+  
+section h2 {
+    color: var(--cor-destaque);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--cor-destaque);
+}
+  
+.container {
+    background-color: var(--cor-secundaria);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para o formulário */
+.section-title {
+    margin: 25px 0 20px 0;
+    border-bottom: 2px solid var(--cor-destaque);
+    padding-bottom: 8px;
+}
+  
+.section-title h3 {
+    color: var(--cor-destaque);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+  
+.form-group {
+    margin-bottom: 15px;
+}
+
+.input-large {
+    font-size: 18px !important;
+    padding: 12px !important;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #EEEEEE;
+  color: var(--cor-fundo);
+  font-size: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--cor-texto);
+}
+
+.labelOculto label{
+    display: none;
+}
+
+/* Estilo para checkboxes e radio buttons */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+  
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+  
+.checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+  
+/* .radio-options {
+    margin-top: 5px;
+} */
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+  
+input[type="file"] {
+    padding: 5px 0;
+}
+
+.file-hint {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 5px;
+    margin-left: 12px;
+}
+
+/* Estilo específico para o botão de próxima etapa  USADO AQUI E EM PERITO2 */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-proxima {
+    background-color: var(--cor-destaque);
+    color: var(--cor-secundaria);
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    flex: 1;
+    text-align: center;
+    display: block;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-proxima:hover {
+    background-color: #e6c55a;
+}
+
+/* Estilo para o container de outros tipo de crime */
+#outroTipoCrimeContainer {
+    margin-top: 10px;
+}
+  
+/* Estilo para o container de identificação */
+#campos-identificacao {
+    transition: all 0.3s ease;
+    padding: 10px 0;
+    border-left: 5px solid var(--cor-destaque);
+    padding-left: 15px;
+    margin-left: 5px;
+}
+
+/* Estilo para destaque de campos obrigatórios */
+input:required, select:required, textarea:required {
+    border-left: 5px solid var(--cor-destaque);
+}
+
+/* Melhorias de usabilidade */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 2px rgba(255, 211, 105, 0.25);
+}
+

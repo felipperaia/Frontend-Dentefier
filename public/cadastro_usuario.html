@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DENTEFIER - Cadastro de Usuários</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="top-banner">
+      <div class="banner-content">
+        <div class="logo-container">
+          <img src="images/logo_dentefier.png" alt="Logo DENTEFIER" class="main-logo">
+        </div>
+        <div class="banner-text">
+          <h1>DENTEFIER</h1>
+          <span class="origin-badge">Laudos e Perícias</span>
+          <p>Sistema de Gerenciamento de Casos Odontolegais</p>
+        </div>
+      </div>
+      <div class="accessibility-tools">
+        <button class="access-btn" id="btn-contrast"><img src="images/icon-contrast.png" alt="Contraste"></button>
+        <button class="access-btn" id="btn-font-increase"><img src="images/icon-font-increase.png" alt="Aumentar fonte"></button>
+        <button class="access-btn" id="btn-font-decrease"><img src="images/icon-font-decrease.png" alt="Diminuir fonte"></button>
+      </div>
+    </div>
+  
+    <header>
+      <nav>
+        <ul>
+          <li><a href="tela_inicio.html" class="active">HOME</a></li>
+          <li><a href="gerenciar_casos.html">GERENCIAR CASOS</a></li>
+          <li class="admin-only"><a href="gerenciar_usuario.html">USUÁRIOS</a></li>
+          <li><a href="logout.html">SAIR</a></li>
+        </ul>
+      </nav>
+  </header>
+
+  <main class="container">
+    <div class="welcome-section">
+      <h2>Cadastro de Usuário</h2>
+      <p class="user-role">Função: <span id="usuario-papel"></span></p>
+      <div class="date-info">
+        <p>Data: <span id="current-date"></span></p>
+      </div>
+    </div>
+
+    <div class="form-container">
+      <form id="user-form">
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username">Nome de Usuário <span class="required">*</span></label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">E-mail <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <!-- Senha -->
+        <div class="form-group">
+          <label for="password">Senha <span class="required">*</span></label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <!-- Role -->
+        <div class="form-group">
+          <label for="tipo_usuario">Papel <span class="required">*</span></label>
+          <select id="tipo_usuario" name="tipo_usuario" required>
+            <option value="">Selecione</option>
+            <option value="admin">Administrador</option>
+            <option value="perito">Perito</option>
+            <option value="assistente">Assistente</option>
+          </select>
+        </div>
+        <!-- Telefone (opcional) -->
+        <div class="form-group">
+          <label for="phone">Telefone</label>
+          <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000">
+        </div>
+        <!-- Department (opcional) -->
+        <div class="form-group">
+          <label for="department">Departamento</label>
+          <input type="text" id="department" name="department">
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn-cancel" onclick="window.location.href='gerenciar_usuario.html'">Cancelar</button>
+          <button type="submit" class="btn-submit">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="js/cadastro_usuario.js"></script>
+  <footer>
+    <div class="footer-content">
+      <!-- footer... -->
+    </div>
+  </footer>
+</body>
+</html>

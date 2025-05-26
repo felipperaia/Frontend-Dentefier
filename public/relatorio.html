@@ -1,0 +1,122 @@
+<!-- relatorio.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DENTEFIER - Relatório Odontolegal</title>
+  <link rel="stylesheet" href="css/relatorio.css">
+</head>
+<body>
+  <div class="relatorio-container" id="relatorio-para-exportar">
+    <div class="cabecalho">
+      <img src="/images/logo_dentefier.png" alt="Logo DENTEFIER" class="logo">
+      <h1>RELATÓRIO ODONTOLEGAL</h1>
+      <h2>DENTEFIER - Sistema de Gerenciamento de Casos Odontolegais</h2>
+      <p class="numero-registro">
+        Laudo Pericial: <span id="laudoPericial"></span> |
+        BO: <span id="numeroBO"></span>
+      </p>
+      <p class="data" id="data-atual"></p>
+    </div>
+
+    <!-- 1. DADOS DO CASO -->
+    <div class="secao" id="secao-dados-caso">
+      <h3>1. DADOS DO CASO</h3>
+      <div class="campo"><strong>Número do BO:</strong> <span id="boNumero"></span></div>                  <!-- caso.contexto.origemDemanda -->
+      <div class="campo"><strong>ID do Laudo Pericial:</strong> <span id="laudoId"></span></div>        <!-- caso.numeroCaso -->
+      <div class="campo"><strong>Data e Hora de Registro:</strong> <span id="dataRegistro"></span></div><!-- caso.dataAbertura -->
+      <div class="campo"><strong>Tipo de Crime:</strong> <span id="tipoCrime"></span></div>             <!-- caso.contexto.tipoCaso -->
+      <div class="campo"><strong>Status do Caso:</strong> <span id="statusCaso" class="status"></span></div> <!-- caso.status -->
+      <div class="campo"><strong>Prioridade:</strong> <span id="prioridade"></span></div>              <!-- caso.historico[0].substatus -->
+    </div>
+
+    <!-- 2. IDENTIFICAÇÃO DO EXAMINADO -->
+    <div class="secao" id="secao-identificacao">
+      <h3>2. IDENTIFICAÇÃO DO EXAMINADO</h3>
+      <div class="campo"><strong>Identificado:</strong> <span id="identificado"></span></div>         <!-- boolean: caso.dadosIndividuo.nome? -->
+      <div class="campo"><strong>Nome completo:</strong> <span id="nomeCompleto"></span></div>         <!-- caso.dadosIndividuo.nome -->
+      <div class="campo"><strong>Sexo:</strong> <span id="sexo"></span></div>                         <!-- caso.dadosIndividuo.sexo -->
+      <div class="campo"><strong>Idade:</strong> <span id="idade"></span></div>                     <!-- caso.dadosIndividuo.idadeEstimado -->
+      <div class="campo"><strong>Documento de identidade:</strong> <span id="identidade"></span></div><!-- caso.dadosIndividuo.identificadores -->
+      <div class="campo"><strong>Etnia:</strong> <span id="etnia"></span></div>                       <!-- caso.dadosIndividuo.etnia -->
+      <div class="campo"><strong>Condições do corpo:</strong> <span id="condicoesCorpo"></span></div> <!-- caso.contexto.descricao -->
+    </div>
+
+    <!-- 3. ACHADOS ODONTOLÓGICOS -->
+    <div class="secao" id="secao-achados">
+      <h3>3. ACHADOS ODONTOLÓGICOS</h3>
+      <div class="campo"><strong>Registros Antemortem:</strong> <span id="registrosAnte"></span></div>  <!-- caso.documentacao.registrosAnte -->
+      <div class="campo"><strong>Registros Postmortem:</strong> <span id="registrosPost"></span></div> <!-- caso.documentacao.registrosPost -->
+      <div class="campo" id="fotografiasContainer">
+        <strong>Fotografias:</strong> <span id="fotografias"></span>                                  <!-- caso.documentacao.fotografias.length -->
+      </div>
+      <div class="campo"><strong>Antecedentes médicos relevantes:</strong> <span id="antecedentes"></span></div> <!-- caso.dadosIndividuo.antecedentes -->
+    </div>
+
+    <!-- 4. CONCLUSÃO PRELIMINAR -->
+    <div class="secao" id="secao-conclusao">
+      <h3>4. CONCLUSÃO PRELIMINAR</h3>
+      <p id="conclusao"></p>    <!-- caso.contexto.descricao como conclusão preliminar -->
+    </div>
+
+    <!-- 5. RESPONSÁVEIS PELA PERÍCIA -->
+    <div class="secao" id="secao-responsaveis">
+      <h3>5. RESPONSÁVEIS PELA PERÍCIA</h3>
+      <div class="campo"><strong>Nome do perito odontolegista:</strong> <span id="perito"></span></div>        <!-- caso.responsavel.username (populado) -->
+      <div class="campo"><strong>Instituição:</strong> <span id="instituicao">Instituto Médico Legal</span></div>
+      <div class="campo"><strong>Nome do auxiliar:</strong> <span id="auxiliar"></span></div>               <!-- caso.cadeiaCustodia.responsavelColeta -->
+    </div>
+
+    <!-- 6. EVIDÊNCIAS ANEXADAS -->
+    <div class="secao" id="secao-evidencias">
+      <h3>6. EVIDÊNCIAS ANEXADAS</h3>
+      <table class="tabela-evidencias" id="tabelaEvidencias">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tipo</th>
+            <th>Descrição</th>
+            <th>Data de Coleta</th>
+            <th>Cadastrado por</th> <!-- Novo campo: usuário que registrou -->
+          </tr>
+        </thead>
+        <tbody id="corpoTabelaEvidencias"></tbody> <!-- Populado do array `evidencias` -->
+      </table>
+    </div>
+
+    <!-- 7. DADOS DO USUÁRIO LOGADO -->
+    <div class="secao" id="secao-usuario">
+      <h3>7. USUÁRIO LOGADO</h3>
+      <div class="campo"><strong>Usuário:</strong> <span id="usuarioNome"></span></div> <!-- user.username -->
+      <div class="campo"><strong>Papel:</strong> <span id="usuarioRole"></span></div> <!-- user.role -->
+    </div>
+
+    <!-- Assinatura -->
+    <div class="assinatura">
+      <p>Assinatura: <span id="nomeAssinante"></span></p> <!-- caso.responsavel.username -->
+      <p>Data: <span id="dataAssinatura"></span></p>
+    </div>
+
+    <div class="rodape">
+      <p>DENTEFIER - Sistema de Gerenciamento de Casos Odontolegais &copy; 2025</p>
+      <p>Este documento possui valor legal e todas as informações contidas são confidenciais</p>
+    </div>
+  </div>
+
+  <div class="acoes">
+    <button id="exportar-pdf">
+      <img src="images/pdf.png" alt="PDF"> Exportar PDF
+    </button>
+    <button id="imprimir">
+      <img src="images/imprimir.png" alt="Imprimir"> Imprimir
+    </button>
+  </div>
+
+  <!-- bibliotecas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+  <!-- script da página -->
+  <script src="js/relatorio.js"></script>
+</body>
+</html>

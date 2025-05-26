@@ -1,0 +1,86 @@
+:root {
+    --cor-fundo: #222831;
+    --cor-secundaria: #393E46;
+    --cor-destaque: #FFD369;
+    --cor-texto: #EEEEEE;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+/* Estilos exclusivos da tela de login  SÃO IGUAIS EM LOGOUT */
+.body-index {
+    margin: 0;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+  
+.login-container {
+    background-color: var(--cor-secundaria);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.login-container .logo {
+    max-width: 150px;
+    margin-bottom: 1rem;
+}
+
+/* Inputs do formulário */
+#login-form input[type="text"],
+#login-form input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #EEEEEE;
+    color: var(--cor-fundo);
+    border-left: 5px solid var(--cor-destaque);
+    padding-left: 15px;
+    font-size: 16px;
+}
+
+/* Botão de login  IGUAIS EM LOGOUT */
+#login-form button {
+    background-color: var(--cor-destaque);
+    color: var(--cor-fundo);
+    padding: 0.75rem;
+    margin: 0.8rem 0;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 70%;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+#login-form button:hover {
+    background-color: #e6c55a;
+}
+
+/* Melhorias de usabilidade */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--cor-destaque);
+  box-shadow: 0 0 0 2px rgba(255, 211, 105, 0.25);
+}
