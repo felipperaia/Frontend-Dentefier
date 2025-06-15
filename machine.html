@@ -60,6 +60,7 @@
     </nav>
   </header>
 
+<section class="charts-section">
   <div class="container">
     <div class="grafico-box rosca">
       <div class="rosca-controls">
@@ -78,17 +79,20 @@
       </div>
       <canvas id="graficoRosca"></canvas>
     </div>
-
-    <div class="grafico-box">
+    </section>
+    <section class="charts-section">
+          <div class="grafico-box">
       <h2>Distribuição de Idade das Vítimas</h2>
       <canvas id="graficoDistribuicao"></canvas>
     </div>
   </div>
 
-  <div id="containerGraficoModelo" class="grafico-box">
+  <div id="containerGraficoModelo" class="container">
     <h3>Fatores Determinantes nos Tipos de Caso</h3>
     <canvas id="graficoModelo"></canvas>
   </div>
+    </section>
+
 
   <script>
     let dadosCasos = [];
