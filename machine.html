@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DENTEFIER - Sistema Odontolegal</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Banner principal -->
+  <div class="top-banner">
+    <div class="banner-content">
+      <div class="logo-container">
+        <img src="images/logo_dentefier.png" alt="Logo DENTEFIER" class="main-logo">
+      </div>
+      <div class="banner-text">
+        <h1>DENTEFIER</h1>
+        <span class="origin-badge">Laudos e Perícias</span>
+        <p>Sistema de Gerenciamento de Casos Odontolegais</p>
+      </div>
+    </div>
+    <div class="accessibility-tools">
+      <button class="access-btn" id="btn-contrast"><img src="images/icon-contrast.png" alt="Contraste"></button>
+      <button class="access-btn" id="btn-font-increase"><img src="images/icon-font-increase.png" alt="Aumentar fonte"></button>
+      <button class="access-btn" id="btn-font-decrease"><img src="images/icon-font-decrease.png" alt="Diminuir fonte"></button>
+    </div>
+  </div>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="tela_inicio.html" class="active">HOME</a></li>
+        <li><a href="gerenciar_casos.html">GERENCIAR CASOS</a></li>
+        <li class="admin-only"><a href="gerenciar_usuario.html">USUÁRIOS</a></li>
+        <li><a href="logout.html">SAIR</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="filtros">
+    <label for="dataInicio">Período de:</label>
+    <input type="date" id="dataInicio" />
+    <label for="dataFim">até:</label>
+    <input type="date" id="dataFim" />
+  </div>
+
+  <div class="container">
+    <div class="grafico-box rosca">
+      <div class="rosca-controls">
+        <label for="variavelRosca">Variável:</label>
+        <select id="variavelRosca">
+          <option value="tipo_do_caso">Tipo do Caso</option>
+          <option value="localizacao">Localização</option>
+          <option value="vitima.etnia">Etnia da Vítima</option>
+        </select>
+      </div>
+      <canvas id="graficoRosca"></canvas>
+    </div>
+
+    <div class="grafico-box">
+      <h2>Distribuição de Idade das Vítimas</h2>
+      <canvas id="graficoDistribuicao"></canvas>
+    </div>
+  </div>
+
+  <div id="containerGraficoModelo">
+    <h3>Fatores Determinantes nos Tipos de Caso</h3>
+    <canvas id="graficoModelo"></canvas>
+  </div>
+
+  <script>
+    let dadosCasos = [];
+    let graficoRosca = null;
+    let graficoDistribuicao = null;
+    let graficoModelo = null;
+
+    const gradiente = [
+      '#40516c', '#4a5d7c', '#53698c', '#5d759c',
+      '#6b82a7', '#7b90b1', '#8b9dba'
+    ];
+
+    async function carregarDados() {
+      try {
+        const res = await fetch("https://machine-learning-jof0.onrender.com/api/casos");
+        dadosCasos = await res.json();
+        atualizarGraficos();
+        inicializarGraficoModelo();
+      } catch (erro) {
+        console.error("Erro ao carregar dados:", erro);
+        alert("Não foi possível carregar os dados.");
+      }
+    }
+
+    function filtrarPorData(casos) {
+      const inicio = document.getElementById('dataInicio').value;
+      const fim = document.getElementById('dataFim').value;
+
+      return casos.filter(caso => {
+        if (!caso.data_do_caso) return false;
+        const data = new Date(caso.data_do_caso);
+        const dataInicio = inicio ? new Date(inicio) : null;
+        const dataFim = fim ? new Date(fim) : null;
+        return (!dataInicio || data >= dataInicio) && (!dataFim || data <= dataFim);
+      });
+    }
+
+    function contarOcorrencias(dados, chave) {
+      const contagem = {};
+      dados.forEach(caso => {
+        try {
+          const valor = chave.includes('.')
+            ? chave.split('.').reduce((o, k) => o && o[k], caso)
+            : caso[chave];
+          if (valor !== undefined && valor !== null) {
+            contagem[valor] = (contagem[valor] || 0) + 1;
+          }
+        } catch {}
+      });
+      return contagem;
+    }
+
+    function atualizarGraficoRosca(dadosFiltrados, variavel) {
+      const contagem = contarOcorrencias(dadosFiltrados, variavel);
+      const labels = Object.keys(contagem);
+      const valores = Object.values(contagem);
+      const cores = gradiente.slice(0, labels.length);
+
+      if (graficoRosca) graficoRosca.destroy();
+      const ctx = document.getElementById("graficoRosca").getContext("2d");
+      graficoRosca = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: valores,
+            backgroundColor: cores,
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { position: 'bottom' },
+            tooltip: {
+              callbacks: {
+                label: context => `${context.label}: ${context.parsed} casos`
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function atualizarGraficoDistribuicao(dadosFiltrados) {
+      const idades = dadosFiltrados
+        .map(c => c.vitima?.idade)
+        .filter(i => typeof i === 'number' && !isNaN(i) && i > 0);
+
+      const max = Math.max(...idades, 100);
+      const bins = [];
+      const labels = [];
+
+      for (let i = 1; i <= max; i += 10) {
+        labels.push(`${i}-${i + 9}`);
+        bins.push(0);
+      }
+
+      idades.forEach(idade => {
+        const index = Math.floor((idade - 1) / 10);
+        if (index >= 0 && index < bins.length) bins[index]++;
+      });
+
+      if (graficoDistribuicao) graficoDistribuicao.destroy();
+
+      const ctx = document.getElementById("graficoDistribuicao").getContext("2d");
+      graficoDistribuicao = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Número de Vítimas',
+            data: bins,
+            backgroundColor: '#5d759c',
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              grid: { display: false },
+              title: {
+                display: true,
+                text: 'Faixa Etária'
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grid: { display: false },
+              ticks: { precision: 0 },
+              title: {
+                display: true,
+                text: 'Quantidade de Vítimas'
+              }
+            }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: context => `${context.parsed.y} vítimas entre ${context.label}`
+              }
+            }
+          }
+        }
+      });
+    }
+
+    async function inicializarGraficoModelo() {
+      try {
+        const res = await fetch("https://machine-learning-jof0.onrender.com/api/modelo/coeficientes");
+        const data = await res.json();
+
+        const processedData = {};
+        Object.keys(data).forEach(key => {
+          processedData[key] = Number(data[key]);
+        });
+
+        const sortedEntries = Object.entries(processedData)
+          .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
+
+        const labels = sortedEntries.map(([key]) => key);
+        const valores = sortedEntries.map(([, value]) => value);
+
+        if (graficoModelo) graficoModelo.destroy();
+
+        const ctx = document.getElementById("graficoModelo").getContext("2d");
+        graficoModelo = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Importância',
+              data: valores,
+              backgroundColor: '#5d759c',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                beginAtZero: true,
+                grid: { display: false },
+                title: {
+                  display: true,
+                  text: 'Valor do Coeficiente'
+                }
+              },
+    	      y: {
+      		grid: { display: false }, // <- ESSA LINHA REMOVE O GRID DO Y
+      		ticks: {
+      		  autoSkip: false
+      		}
+    	      }
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `Importância: ${ctx.parsed.x.toFixed(4)}`
+                }
+              }
+            }
+          }
+        });
+
+      } catch (error) {
+        console.error("Erro ao carregar coeficientes:", error);
+        const ctx = document.getElementById("graficoModelo").getContext("2d");
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#ff0000";
+        ctx.fillText("Erro ao carregar dados do modelo", 20, 50);
+      }
+    }
+
+    function atualizarGraficos() {
+      const dadosFiltrados = filtrarPorData(dadosCasos);
+      const variavel = document.getElementById("variavelRosca").value;
+      atualizarGraficoRosca(dadosFiltrados, variavel);
+      atualizarGraficoDistribuicao(dadosFiltrados);
+    }
+
+    document.getElementById("dataInicio").addEventListener("change", atualizarGraficos);
+    document.getElementById("dataFim").addEventListener("change", atualizarGraficos);
+    document.getElementById("variavelRosca").addEventListener("change", atualizarGraficos);
+
+    carregarDados();
+  </script>
+    <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="images/logo_dentefier.png" alt="DENTEFIER">
+        <p>DENTEFIER &copy; 2025</p>
+      </div>
+      <div class="footer-origin">
+        <p>Sistema de Gerenciamento de Casos Odontolegais</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
