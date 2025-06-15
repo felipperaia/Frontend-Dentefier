@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,14 +18,16 @@
       padding: 15px;
       background: white;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+
     .filtros label {
       font-weight: bold;
       color: #40516c;
     }
   </style>
 </head>
+
 <body>
   <!-- Banner principal -->
   <div class="top-banner">
@@ -40,8 +43,10 @@
     </div>
     <div class="accessibility-tools">
       <button class="access-btn" id="btn-contrast"><img src="images/icon-contrast.png" alt="Contraste"></button>
-      <button class="access-btn" id="btn-font-increase"><img src="images/icon-font-increase.png" alt="Aumentar fonte"></button>
-      <button class="access-btn" id="btn-font-decrease"><img src="images/icon-font-decrease.png" alt="Diminuir fonte"></button>
+      <button class="access-btn" id="btn-font-increase"><img src="images/icon-font-increase.png"
+          alt="Aumentar fonte"></button>
+      <button class="access-btn" id="btn-font-decrease"><img src="images/icon-font-decrease.png"
+          alt="Diminuir fonte"></button>
     </div>
   </div>
 
@@ -56,13 +61,6 @@
     </nav>
   </header>
 
-  <div class="filtros">
-    <label for="dataInicio">Período de:</label>
-    <input type="date" id="dataInicio" />
-    <label for="dataFim">até:</label>
-    <input type="date" id="dataFim" />
-  </div>
-
   <div class="container">
     <div class="grafico-box rosca">
       <div class="rosca-controls">
@@ -72,6 +70,12 @@
           <option value="localizacao">Localização</option>
           <option value="vitima.etnia">Etnia da Vítima</option>
         </select>
+        <div class="filtros">
+          <label for="dataInicio">Período de:</label>
+          <input type="date" id="dataInicio" />
+          <label for="dataFim">até:</label>
+          <input type="date" id="dataFim" />
+        </div>
       </div>
       <canvas id="graficoRosca"></canvas>
     </div>
@@ -133,7 +137,7 @@
           if (valor !== undefined && valor !== null) {
             contagem[valor] = (contagem[valor] || 0) + 1;
           }
-        } catch {}
+        } catch { }
       });
       return contagem;
     }
@@ -279,12 +283,12 @@
                   text: 'Valor do Coeficiente'
                 }
               },
-    	      y: {
-      		grid: { display: false }, // <- ESSA LINHA REMOVE O GRID DO Y
-      		ticks: {
-      		  autoSkip: false
-      		}
-    	      }
+              y: {
+                grid: { display: false }, // <- ESSA LINHA REMOVE O GRID DO Y
+                ticks: {
+                  autoSkip: false
+                }
+              }
             },
             plugins: {
               legend: { display: false },
@@ -319,7 +323,7 @@
 
     carregarDados();
   </script>
-    <footer>
+  <footer>
     <div class="footer-content">
       <div class="footer-logo">
         <img src="images/logo_dentefier.png" alt="DENTEFIER">
@@ -331,4 +335,5 @@
     </div>
   </footer>
 </body>
+
 </html>
